@@ -1,0 +1,32 @@
+{
+  "name": "doglit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobinWest/doglit.git"
+  },
+  "author": "Robin West",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobinWest/doglit/issues"
+  },
+  "homepage": "https://github.com/RobinWest/doglit#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "webpack": "^4.0.0",
+    "webpack-dev-server": "^3.0.0"
+  }
+}
