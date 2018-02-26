@@ -1,7 +1,6 @@
-var React             = require('react');
+var React = require('react');
 
-var BodyContainer     = require('./BodyContainer');
-var SidebarContainer  = require('./SidebarContainer');
+// var OtherComponent     = require('./OtherComponent');
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -22,9 +21,10 @@ class MainContainer extends React.Component {
 	render(){
 		return (
 			<div className="main-container">
-				<OtherComponent
+				<h1>Doglit</h1>
+				{/*<OtherComponent
 					prop={this.state.key}
-				 />
+				 />*/}
 			</div>
 		);
 	};

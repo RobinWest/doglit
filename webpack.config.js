@@ -1,16 +1,16 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+// var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-	template: __dirname + '/app/index.html',
+	template: __dirname + '/src/index.html',
 	filename: 'index.html',
 	inject: 'body'
 });
 
 module.exports = {
 	entry: {
-		app: __dirname + '/app/index.js'
+		app: __dirname + '/src/index.js'
 	},
 	module: {
 		rules: [
@@ -19,7 +19,7 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
-					presets: ['es2015-ie', 'stage-0']
+					presets: ['es2015', 'react']
 				}
 			}
 		]
@@ -30,7 +30,7 @@ module.exports = {
 	},
 	plugins: [
 		HTMLWebpackPluginConfig,
-		CopyWebpackPluginConfig
+		// CopyWebpackPluginConfig
 	],
 	devtool: 'source-map'
 };
