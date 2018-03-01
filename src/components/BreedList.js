@@ -12,7 +12,7 @@ const BreedList = (props) => {
 
 			<select name="breed-select" id="" onChange={props.handleChange}>
 				<option value="">Choose a breed&hellip;</option>
-				{Object.keys(props.breeds).map(function(breed, index){
+				{Object.keys(props.breeds).map((breed, index) => {
 					return <option key={'skill-' + index} value={breed}>{ breed }</option>;
 				}, this)}
 			</select>

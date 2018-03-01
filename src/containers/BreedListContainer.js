@@ -21,12 +21,12 @@ class BreedListContainer extends React.Component {
 
 		dogService
 			.getBreedList()
-			.then(function resolve(response){
+			.then(response => {
 				console.log(response);
 
 				self.setBreedData(response.data.message);
 
-			}, function reject(err){
+			}, err => {
 				console.log(err);
 			});
 	}

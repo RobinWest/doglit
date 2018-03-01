@@ -11,7 +11,7 @@ class DoglitContainer extends React.Component {
 
 		this.state = {
 			loading: true,
-			doglitImageUrl: {}
+			doglitImageUrl: ''
 		};
 	}
 
@@ -24,12 +24,12 @@ class DoglitContainer extends React.Component {
 
 		dogService
 			.getRandomDog()
-			.then(function resolve(response){
+			.then(response => {
 				console.log(response);
 
 				self.setDoglit(response.data.message);
 
-			}, function reject(err){
+			}, err => {
 				console.log(err);
 			});
 	}

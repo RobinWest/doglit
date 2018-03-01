@@ -13,19 +13,17 @@ class MainContainer extends React.Component {
 		};
 	}
 
-	mySetState(value = 'default'){
-		this.setState({
-			key: value
-		});
-	};
+	// mySetState(value = 'default'){
+	// 	this.setState({
+	// 		key: value
+	// 	});
+	// };
 
 	render(){
 		return (
 			<div className="main-container">
 				<h1>Doglit</h1>
-				<BreedListContainer
-					prop={this.state.key}
-				/>
+				<BreedListContainer/>
 
 				<DoglitContainer/>
 
