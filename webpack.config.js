@@ -19,7 +19,14 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
-					presets: ['es2015', 'react']
+					presets: [
+						'react',
+						['env', {
+							targets: {
+								browsers: ['last 2 versions', 'ie >= 11']
+							}
+						}]
+					]
 				}
 			}
 		]
