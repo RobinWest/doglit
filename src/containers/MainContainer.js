@@ -1,6 +1,6 @@
-var React = require('react');
+let React = require('react');
 
-// var OtherComponent     = require('./OtherComponent');
+let BreedListContainer = require('./BreedListContainer');
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -22,9 +22,9 @@ class MainContainer extends React.Component {
 		return (
 			<div className="main-container">
 				<h1>Doglit</h1>
-				{/*<OtherComponent
+				<BreedListContainer
 					prop={this.state.key}
-				 />*/}
+				/>
 			</div>
 		);
 	};
