@@ -4,8 +4,11 @@ const apiUrl = '//dog.ceo/api';
 
 const DogService = (props) => {
 	return {
-		getBreeds: function(){
+		getBreedList: function(){
 			return 	axios.get(`${apiUrl}/breeds/list/all`);
+		},
+		getRandomDog: function(){
+			return 	axios.get(`${apiUrl}/breeds/image/random`);
 		}
 	}
 }

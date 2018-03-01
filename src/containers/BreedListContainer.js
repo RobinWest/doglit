@@ -11,7 +11,8 @@ class BreedListContainer extends React.Component {
 
 		this.state = {
 			loading: true,
-			breeds: {}
+			breeds: {},
+			selectedBreed: null
 		};
 	}
 
@@ -19,7 +20,7 @@ class BreedListContainer extends React.Component {
 		let self = this;
 
 		dogService
-			.getBreeds()
+			.getBreedList()
 			.then(function resolve(response){
 				console.log(response);
 
@@ -38,6 +39,17 @@ class BreedListContainer extends React.Component {
 		});
 	};
 
+	onSelectBreed(e){
+		console.log(e);
+		let element = e.target,
+			value   = element.value;
+
+		console.log(value);
+		this.setState({
+			selectedBreed: value
+		});
+	}
+
 	render(){
 		return (
 			<div className="breed-list-container">
@@ -45,6 +57,7 @@ class BreedListContainer extends React.Component {
 				<BreedList
 					loading={this.state.loading}
 					breeds={this.state.breeds}
+					handleChange={this.onSelectBreed}
 				/>
 			</div>
 		);

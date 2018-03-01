@@ -1,6 +1,7 @@
 let React = require('react');
 
-let BreedListContainer = require('./BreedListContainer');
+let BreedListContainer = require('./BreedListContainer'),
+	DoglitContainer    = require('./DoglitContainer');
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -25,6 +26,9 @@ class MainContainer extends React.Component {
 				<BreedListContainer
 					prop={this.state.key}
 				/>
+
+				<DoglitContainer/>
+
 			</div>
 		);
 	};

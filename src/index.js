@@ -1,6 +1,7 @@
-var React         = require('react');
-var ReactDOM      = require('react-dom');
-var MainContainer = require('./containers/MainContainer');
+let React         = require('react');
+let ReactDOM      = require('react-dom');
+
+let MainContainer = require('./containers/MainContainer');
 
 require('./css/main.less');
 
