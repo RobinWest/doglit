@@ -22,11 +22,12 @@ class MainContainer extends React.Component {
 	render(){
 		return (
 			<div className="main-container">
-				<h1>Doglit</h1>
-				<BreedListContainer/>
+				<div className="header-container">
+					<h1>Doglit</h1>
+					<BreedListContainer/>
+				</div>
 
 				<DoglitContainer/>
-
 			</div>
 		);
 	};

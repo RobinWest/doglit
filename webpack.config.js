@@ -1,5 +1,5 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
@@ -28,6 +28,17 @@ module.exports = {
 						}]
 					]
 				}
+			}, {
+				test: [/\.less$/i, /\.css$/i],
+				use: ExtractTextPlugin.extract({
+					use: [{
+						loader: "css-loader",
+						options: { sourceMap: true }
+					}, {
+						loader: "less-loader",
+						options: { sourceMap: true }
+					}]
+				})
 			}
 		]
 	},
@@ -37,7 +48,7 @@ module.exports = {
 	},
 	plugins: [
 		HTMLWebpackPluginConfig,
+		new ExtractTextPlugin('./assets/css/style.css')
 		// CopyWebpackPluginConfig
-	],
-	devtool: 'source-map'
+	]
 };

@@ -1,7 +1,9 @@
 let React = require('react');
 let dogService = require('../services/DogService');
 
-// let BreedList = require('../components/BreedList');
+require('../css/components/doglit.less');
+
+let DoglitHeroImage = require('../components/DoglitHeroImage');
 
 class DoglitContainer extends React.Component {
 	constructor(){
@@ -57,7 +59,9 @@ class DoglitContainer extends React.Component {
 		return (
 			<div className="doglit-container">
 				<h2>Doglit Container</h2>
-				<img src={ this.state.doglitImageUrl } alt="Doglit" />
+				<DoglitHeroImage
+					imgUrl={ this.state.doglitImageUrl }
+				/>
 			</div>
 		);
 	};

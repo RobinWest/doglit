@@ -1,0 +1,24 @@
+@red: #D31D0E;
+
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.main-container {
+	display: grid;
+	grid-template-columns: 30vw 40vw 30vw;
+	grid-template-rows: 25vh 50vh 25vh;
+}
+
+.header-container,
+.doglit-container{
+	grid-column: 2 e('/') 3; // e('/') escapes the slash, making it barely worth using shorthand :D
+}
