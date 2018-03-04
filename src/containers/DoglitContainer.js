@@ -9,8 +9,6 @@ class DoglitContainer extends React.Component {
 	constructor(){
 		super();
 
-		// this.setBreedData = this.setBreedData.bind(this);
-
 		this.state = {
 			loading: true,
 			doglitImageUrl: ''
@@ -44,21 +42,9 @@ class DoglitContainer extends React.Component {
 		});
 	};
 
-	// onSelectBreed(e){
-	// 	console.log(e);
-	// 	let element = e.target,
-	// 		value   = element.value;
-
-	// 	console.log(value);
-	// 	this.setState({
-	// 		selectedBreed: value
-	// 	});
-	// }
-
 	render(){
 		return (
 			<div className="doglit-container">
-				<h2>Doglit Container</h2>
 				<DoglitHeroImage
 					imgUrl={ this.state.doglitImageUrl }
 				/>
