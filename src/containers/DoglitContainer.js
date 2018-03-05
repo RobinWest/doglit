@@ -15,38 +15,38 @@ class DoglitContainer extends React.Component {
 		};
 	}
 
-	componentDidMount(){
-		this.getRandomDoglit();
-	}
+	// componentDidMount(){
+	// 	this.getRandomDoglit();
+	// }
 
-	getRandomDoglit(){
-		let self = this;
+	// getRandomDoglit(){
+	// 	let self = this;
 
-		dogService
-			.getRandomDog()
-			.then(response => {
-				console.log(response);
+	// 	dogService
+	// 		.getRandomDog()
+	// 		.then(response => {
+	// 			console.log(response);
 
-				self.setDoglit(response.data.message);
+	// 			self.setDoglit(response.data.message);
 
-			}, err => {
-				console.log(err);
-			});
-	}
+	// 		}, err => {
+	// 			console.log(err);
+	// 		});
+	// }
 
-	setDoglit(data){
-		console.log('setDoglit:', data);
+	// setDoglit(data){
+	// 	console.log('setDoglit:', data);
 
-		this.setState({
-			doglitImageUrl: data
-		});
-	};
+	// 	this.setState({
+	// 		doglitImageUrl: data
+	// 	});
+	// };
 
 	render(){
 		return (
 			<div className="doglit-container">
 				<DoglitHeroImage
-					imgUrl={ this.state.doglitImageUrl }
+					imgUrl={ this.props.selectedDoglitUrl }
 				/>
 			</div>
 		);
