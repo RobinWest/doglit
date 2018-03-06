@@ -13,6 +13,10 @@ html {
   background: #fff43c;
 }
 
+html, body, #app, .main-container{
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -22,29 +26,46 @@ body {
 
 .main-container {
 	display: grid;
-	grid-template-columns: 30vw 40vw 30vw;
-	grid-template-rows: 100vh;
+	grid-template-columns: 2fr 3fr 3fr 2fr;
+	grid-template-rows: 1fr 3fr 1fr;
+	grid-gap: 1em 2em;
+
+	grid-template-areas: 
+		"header header header header"
+		"main main main main"
+		". previous next ."
+	;
+
+	@media @size-md{
+		grid-template-areas: 
+			". header header ."
+			"previous main main next"
+			". . . ."
+		;
+	}
+
 }
 
 section{
-	&.main-column{
-		grid-column: 1 e('/') 4;
-		padding: 0 2em;
-
-		@media @size-md{
-			grid-column: 2 e('/') 3; // e('/') escapes the slash, making it barely worth using shorthand :D
-			padding: 0;
-		}
+	&.header-area{
+		grid-area: header;
+	}
+	&.doglit-area{
+		grid-area: main;
 
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 	}
+	&.previous-area{
+		grid-area: previous;
+	}
+	&.next-area{
+		grid-area: next;
+	}
 }
 
 .header-container{
-	flex: 1 3 auto;
-
 	h1{
 		.cutout;
 		font-family: 'Nunito', sans-serif;

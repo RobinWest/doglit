@@ -2,17 +2,19 @@ let React      = require('react');
 let dogService = require('../services/DogService');
 
 let BreedListContainer = require('./BreedListContainer'),
-	DoglitContainer    = require('./DoglitContainer');
+	DoglitContainer    = require('./DoglitContainer'),
+	DoglitSwitch       = require('../components/DoglitSwitch');
 
 class MainContainer extends React.Component {
 	constructor(){
 		super();
 
 		this.updateSelectedBreed = this.updateSelectedBreed.bind(this);
+		this.updateSelectedDoglit = this.updateSelectedDoglit.bind(this);
 
 		this.state = {
 			selectedBreed: null,
-			selectedDoglit: null,
+			selectedDoglitIndex: null,
 			imageCollection: []
 		};
 	}
@@ -33,8 +35,6 @@ class MainContainer extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState){
-		console.log('componentDidUpdate', prevState);
-
 		if(prevState.selectedBreed !== this.state.selectedBreed)
 			this.fetchBreed(this.state.selectedBreed);
 	}
@@ -45,7 +45,6 @@ class MainContainer extends React.Component {
 		dogService
 			.getBreedImages(breed)
 			.then(response => {
-				console.log(response);
 				self.updateImageCollection(response.data.message)
 
 			}, err => {
@@ -60,7 +59,7 @@ class MainContainer extends React.Component {
 	}
 
 	updateImageCollection(data){
-		console.log('imageCollection', data);
+		// console.log('imageCollection', data);
 
 		this.setState({
 			imageCollection: data
@@ -72,20 +71,39 @@ class MainContainer extends React.Component {
 
 	updateSelectedDoglit(index){
 		this.setState({
-			selectedDoglit: index
+			selectedDoglitIndex: index
 		});
 	}
 
-	// mySetState(value = 'default'){
-	// 	this.setState({
-	// 		key: value
-	// 	});
-	// };
+	onSwitchDoglit(newIndex){
+		let length = this.state.imageCollection.length;
+
+		if(newIndex + 1 > length)
+			newIndex = 0;
+
+		if(newIndex < 0)
+			newIndex = length - 1;
+
+		this.updateSelectedDoglit(newIndex);
+	}
+
+	getShiftedIndex(indexShift){
+		let newIndex = this.state.selectedDoglitIndex + indexShift,
+			length = this.state.imageCollection.length;
+
+		if(newIndex + 1 > length)
+			newIndex = 0;
+
+		if(newIndex < 0)
+			newIndex = length - 1;
+
+		return newIndex;
+	}
 
 	render(){
 		return (
 			<div className="main-container">
-				<section className="main-column">
+				<section className="header-area">
 					<div className="header-container">
 						<h1>DOGLIT</h1>
 						<hr/>
@@ -94,9 +112,22 @@ class MainContainer extends React.Component {
 							onSelectBreed={this.updateSelectedBreed}
 						/>
 					</div>
-
+				</section>
+				<section className="doglit-area">
 					<DoglitContainer
-						selectedDoglitUrl={this.state.imageCollection[this.state.selectedDoglit]}
+						selectedDoglitUrl={this.state.imageCollection[this.state.selectedDoglitIndex]}
+					/>
+				</section>
+				<section className="previous-area">
+					<DoglitSwitch
+						placeholderImageUrl={this.state.imageCollection[this.getShiftedIndex(-1)]}
+						handleSwitchDoglit={() => this.onSwitchDoglit(this.getShiftedIndex(-1))}
+					/>
+				</section>
+				<section className="next-area">
+					<DoglitSwitch
+						placeholderImageUrl={this.state.imageCollection[this.getShiftedIndex(1)]}
+						handleSwitchDoglit={() => this.onSwitchDoglit(this.getShiftedIndex(1))}
 					/>
 				</section>
 			</div>

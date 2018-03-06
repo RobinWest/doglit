@@ -1,11 +1,5 @@
 let React = require('react');
 
-// require('../css/components/sidebar.less');
-
-// var Contact = require('./Contact');
-
-// var CrossIcon     = require('./icons/CrossIcon');
-
 const BreedList = (props) => {
 	return (
 		<div className={`breed-list ${props.loading}`}>
