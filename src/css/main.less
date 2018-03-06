@@ -31,16 +31,16 @@ body {
 	grid-gap: 1em 2em;
 
 	grid-template-areas: 
-		"header header header header"
-		"main main main main"
-		". previous next ."
+		"header header 		header 	header"
+		"main 	main 		main 	main"
+		". 		previous 	next 	."
 	;
 
 	@media @size-md{
 		grid-template-areas: 
-			". header header ."
-			"previous main main next"
-			". . . ."
+			". 			header 	header 	."
+			"previous 	main 	main 	next"
+			". 			main 	main 	."
 		;
 	}
 
