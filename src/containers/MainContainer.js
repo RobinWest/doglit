@@ -23,11 +23,17 @@ class MainContainer extends React.Component {
 		let self = this;
 
 		dogService
-			.getRandomDog()
-			.then(response => {
-				console.log(response);
+			.getRandomDog(3)
+			.then(responses => {
+				console.log(responses);
 
-				self.updateImageCollection([response.data.message]);
+				let images = [];
+
+				responses.forEach((response) => {
+					images.push(response.data.message);
+				});
+
+				self.updateImageCollection(images);
 
 			}, err => {
 				console.log(err);
