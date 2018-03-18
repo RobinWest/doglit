@@ -1,5 +1,5 @@
 let React = require('react');
-let dogService = require('../services/DogService');
+// let dogService = require('../services/DogService');
 
 require('../css/components/doglit.less');
 
@@ -9,10 +9,10 @@ class DoglitContainer extends React.Component {
 	constructor(){
 		super();
 
-		this.state = {
-			loading: true,
-			doglitImageUrl: ''
-		};
+		// this.state = {
+		// 	loading: true,
+		// 	doglitImageUrl: ''
+		// };
 	}
 
 	render(){

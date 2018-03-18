@@ -12,6 +12,7 @@ module.exports = {
 	entry: {
 		app: __dirname + '/src/index.js'
 	},
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -25,7 +26,8 @@ module.exports = {
 							targets: {
 								browsers: ['last 2 versions', 'ie >= 11']
 							}
-						}]
+						}],
+						'stage-0'
 					]
 				}
 			}, {
