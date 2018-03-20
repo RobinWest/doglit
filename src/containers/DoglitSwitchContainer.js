@@ -20,6 +20,9 @@ const DoglitSwitchContainer = (mode) => {
 		}
 
 		handleClick(newIndex){
+			if(!this.props.selectedBreed)
+				this.props.onAddRandomDoglit();
+
 			this.props.updateSelectedDoglit(newIndex);
 		}
 

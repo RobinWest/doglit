@@ -11,6 +11,7 @@ class MainContainer extends React.Component {
 
 		this.updateSelectedBreed  = this.updateSelectedBreed.bind(this);
 		this.updateSelectedDoglit = this.updateSelectedDoglit.bind(this);
+		this.addRandomDoglit      = this.addRandomDoglit.bind(this);
 
 		this.state = {
 			selectedBreed: null,
@@ -22,27 +23,27 @@ class MainContainer extends React.Component {
 	componentDidMount(){
 		let self = this;
 
-		dogService
-			.getRandomDog(3)
-			.then(responses => {
-				console.log(responses);
+		this.addRandomDoglit();
 
-				let images = [];
-
-				responses.forEach((response) => {
-					images.push(response.data.message);
-				});
-
-				self.updateImageCollection(images);
-
-			}, err => {
-				console.log(err);
-			});
+		this.updateSelectedDoglit(0);
 	}
 
 	componentDidUpdate(prevProps, prevState){
 		if(prevState.selectedBreed !== this.state.selectedBreed)
 			this.fetchBreed(this.state.selectedBreed);
+	}
+
+	fetchRandomDoglit(){
+		return dogService
+			.getRandomDog()
+			.then(response => {
+				let image = response.data.message;
+
+				return image;
+
+			}, err => {
+				console.log(err);
+			}).then();
 	}
 
 	fetchBreed(breed){
@@ -51,7 +52,8 @@ class MainContainer extends React.Component {
 		dogService
 			.getBreedImages(breed)
 			.then(response => {
-				self.updateImageCollection(response.data.message)
+				// TODO should this straight up update?
+				self.updateImageCollection(response.data.message);
 
 			}, err => {
 				console.log(err);
@@ -79,6 +81,31 @@ class MainContainer extends React.Component {
 		});
 	}
 
+	addRandomDoglit(){
+		let doglitPromise = this.fetchRandomDoglit();
+
+		doglitPromise
+			.then(response => {
+				this.addImageToCollection(response);
+
+			}, err => {
+				console.log(err);
+			});
+	}
+
+	addImageToCollection(newImage){
+		if(!newImage)
+			return;
+
+		let imageCollection = this.state.imageCollection;
+
+		imageCollection.push(newImage);
+
+		this.setState({
+			imageCollection: imageCollection
+		});
+	}
+
 	render(){
 		return (
 			<div className="main-container">
@@ -98,19 +125,23 @@ class MainContainer extends React.Component {
 					/>
 				</section>
 				<section className="previous-area">
-					<DoglitSwitchPrevious
-						imageCollection={this.state.imageCollection}
-						updateSelectedDoglit={this.updateSelectedDoglit}
-						selectedDoglitIndex={this.state.selectedDoglitIndex}
-						selectedBreed={this.state.selectedBreed}
-					/>
+					{this.state.selectedBreed && 
+						<DoglitSwitchPrevious
+							selectedDoglitIndex={this.state.selectedDoglitIndex}
+							selectedBreed={this.state.selectedBreed}
+							imageCollection={this.state.imageCollection}
+							updateSelectedDoglit={this.updateSelectedDoglit}
+							onAddRandomDoglit={this.addRandomDoglit}
+						/>
+					}
 				</section>
 				<section className="next-area">
 					<DoglitSwitchNext
-						imageCollection={this.state.imageCollection}
-						updateSelectedDoglit={this.updateSelectedDoglit}
 						selectedDoglitIndex={this.state.selectedDoglitIndex}
 						selectedBreed={this.state.selectedBreed}
+						imageCollection={this.state.imageCollection}
+						updateSelectedDoglit={this.updateSelectedDoglit}
+						onAddRandomDoglit={this.addRandomDoglit}
 					/>
 				</section>
 			</div>
