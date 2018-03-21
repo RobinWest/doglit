@@ -81,12 +81,15 @@ class MainContainer extends React.Component {
 		});
 	}
 
-	addRandomDoglit(){
+	addRandomDoglit(switchToDoglit){
 		let doglitPromise = this.fetchRandomDoglit();
 
 		doglitPromise
 			.then(response => {
 				this.addImageToCollection(response);
+
+				if(switchToDoglit === true)
+					this.updateSelectedDoglit(this.state.imageCollection.length - 1);
 
 			}, err => {
 				console.log(err);
@@ -107,6 +110,41 @@ class MainContainer extends React.Component {
 	}
 
 	render(){
+		let previousSwitchComponent,
+			nextSwitchComponent;
+
+		if(this.state.imageCollection.length > 1){
+			previousSwitchComponent = (
+				<DoglitSwitchPrevious
+					selectedDoglitIndex={this.state.selectedDoglitIndex}
+					selectedBreed={this.state.selectedBreed}
+					imageCollection={this.state.imageCollection}
+					updateSelectedDoglit={this.updateSelectedDoglit}
+				/>
+			);
+		}
+
+		if(!this.state.selectedBreed && this.state.selectedDoglitIndex >= this.state.imageCollection.length - 1){
+			nextSwitchComponent = (
+				<DoglitSwitchRandom
+					selectedDoglitIndex={this.state.selectedDoglitIndex}
+					selectedBreed={this.state.selectedBreed}
+					imageCollection={this.state.imageCollection}
+					updateSelectedDoglit={this.updateSelectedDoglit}
+					onAddRandomDoglit={this.addRandomDoglit}
+				/>
+			);
+		} else {
+			nextSwitchComponent = (
+				<DoglitSwitchNext
+					selectedDoglitIndex={this.state.selectedDoglitIndex}
+					selectedBreed={this.state.selectedBreed}
+					imageCollection={this.state.imageCollection}
+					updateSelectedDoglit={this.updateSelectedDoglit}
+				/>
+			);
+		}
+
 		return (
 			<div className="main-container">
 				<section className="header-area">
@@ -125,24 +163,10 @@ class MainContainer extends React.Component {
 					/>
 				</section>
 				<section className="previous-area">
-					{this.state.selectedBreed && 
-						<DoglitSwitchPrevious
-							selectedDoglitIndex={this.state.selectedDoglitIndex}
-							selectedBreed={this.state.selectedBreed}
-							imageCollection={this.state.imageCollection}
-							updateSelectedDoglit={this.updateSelectedDoglit}
-							onAddRandomDoglit={this.addRandomDoglit}
-						/>
-					}
+					{ previousSwitchComponent }
 				</section>
 				<section className="next-area">
-					<DoglitSwitchNext
-						selectedDoglitIndex={this.state.selectedDoglitIndex}
-						selectedBreed={this.state.selectedBreed}
-						imageCollection={this.state.imageCollection}
-						updateSelectedDoglit={this.updateSelectedDoglit}
-						onAddRandomDoglit={this.addRandomDoglit}
-					/>
+					{ nextSwitchComponent }
 				</section>
 			</div>
 		);
@@ -151,5 +175,6 @@ class MainContainer extends React.Component {
 
 const DoglitSwitchPrevious = DoglitSwitchContainer("previous");
 const DoglitSwitchNext     = DoglitSwitchContainer("next");
+const DoglitSwitchRandom   = DoglitSwitchContainer("random");
 
 module.exports = MainContainer;

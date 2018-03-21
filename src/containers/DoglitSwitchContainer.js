@@ -5,13 +5,15 @@ require('../css/components/doglitSwitch.less');
 let DoglitSwitch = require('../components/DoglitSwitch');
 let ForwardIcon  = require('../icons/ForwardIcon');
 let BackIcon     = require('../icons/BackIcon');
+let RandomIcon   = require('../icons/RandomIcon');
 
 const DoglitSwitchContainer = (mode) => {
 	return class DoglitSwitchContainer extends React.Component {
 		constructor(props){
 			super(props);
 
-			this.handleClick = this.handleClick.bind(this);
+			this.handleClick     = this.handleClick.bind(this);
+			this.getRandomDoglit = this.getRandomDoglit.bind(this);
 
 			// this.state = {
 			// 	loading: true,
@@ -20,12 +22,12 @@ const DoglitSwitchContainer = (mode) => {
 		}
 
 		handleClick(newIndex){
-			if(!this.props.selectedBreed)
-				this.props.onAddRandomDoglit();
-
 			this.props.updateSelectedDoglit(newIndex);
 		}
 
+		getRandomDoglit(){
+			this.props.onAddRandomDoglit(true);
+		}
 		getPreviousDoglit(){
 			let newIndex = this.props.selectedDoglitIndex - 1,
 				length   = this.props.imageCollection.length;
@@ -46,13 +48,21 @@ const DoglitSwitchContainer = (mode) => {
 		}
 
 		render(){
+			// TODO k this all seems suitably obtuse - should be separated into own containers I reckon
 			let switchComponent;
 
 			const SwitchWithPreviousIcon = DoglitSwitch(BackIcon),
 				  SwitchWithNextIcon     = DoglitSwitch(ForwardIcon),
+				  SwitchWithRandomIcon   = DoglitSwitch(RandomIcon),
 				  EmptyDoglitSwitch      = DoglitSwitch();
 
-			if(mode === 'previous'){
+			if(mode === 'random'){
+				switchComponent = (
+					<SwitchWithRandomIcon
+						onSwitchDoglit={ () => this.getRandomDoglit() }
+					/>
+				);
+			} else if(mode === 'previous') {
 				let previousDoglitIndex = this.getPreviousDoglit();
 
 				// Default
@@ -71,7 +81,7 @@ const DoglitSwitchContainer = (mode) => {
 						/>
 					);
 				}
-			} else {
+			} else if(mode === 'next') {
 				let nextDoglitIndex = this.getNextDoglit();
 
 				// Default
