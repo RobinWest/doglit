@@ -11,7 +11,7 @@ class BreedListContainer extends React.Component {
 
 		this.state = {
 			loading: true,
-			breeds: {}
+			breedList: {}
 		};
 	}
 
@@ -29,16 +29,32 @@ class BreedListContainer extends React.Component {
 	}
 
 	setBreedData(data){
+		let breedList = this.buildBreedList(data);
+
+		console.log(breedList);
+
 		this.setState({
-			breeds: data
+			breedList: breedList
 		});
 	};
 
-	onSelectBreed(e){
-		let element = e.target,
-			value   = element.value;
+	buildBreedList(data){
+		let breedList = [];
 
-		this.props.onSelectBreed(value);
+		for(var breed in data){
+			// TODO add groups for sub-breeds
+			breedList.push({
+				value: breed,
+				label: breed,
+				img: 'https://dog.ceo/api/img/leonberg/n02111129_253.jpg'
+			});
+		}
+
+		return breedList;
+	}
+
+	onSelectBreed(selection){
+		this.props.onSelectBreed(selection.value);
 	}
 
 	render(){
@@ -46,7 +62,7 @@ class BreedListContainer extends React.Component {
 			<div className="breed-list-container">
 				<BreedList
 					loading={this.state.loading}
-					breeds={this.state.breeds}
+					breedList={this.state.breedList}
 					selectedBreed={this.props.selectedBreed}
 					handleChange={this.onSelectBreed}
 				/>

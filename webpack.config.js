@@ -12,7 +12,8 @@ module.exports = {
 	entry: {
 		app: __dirname + '/src/index.js'
 	},
-	devtool: 'source-map',
+	devtool: 'inline-source-map',
+	mode: 'development',
 	module: {
 		rules: [
 			{
