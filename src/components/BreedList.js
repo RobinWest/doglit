@@ -3,6 +3,8 @@ let DoglitDropdown = require('./DoglitDropdown');
 
 
 require('react-dropdown/style.css');
+require('../css/components/breedList.less');
+
 
 const BreedList = (props) => {
 	return (
@@ -12,7 +14,9 @@ const BreedList = (props) => {
 				onChange={props.handleChange}
 				options={props.breedList}
 				value={props.selectedBreed}
-				placeholder="Choose a breed&hellip;" />
+				placeholder={props.breedList.length ? `Choose a breed...` : 'Loading...'}
+				disabled={props.breedList.length ? false : 'disabled'}
+			/>
 
 			{/*<select name="breed-select" id="breedSelect" onChange={props.handleChange}>
 				<option value="">Choose a breed&hellip;</option>
