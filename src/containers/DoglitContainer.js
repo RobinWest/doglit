@@ -32,6 +32,7 @@ class DoglitContainer extends React.Component {
 		let el   = document.createElement('a'),
 			path = '';
 
+		// Create an element and set it's href so we can rip bits out
 		el.href = url;
 
 		path = el.pathname.replace('/api/img/', '');
@@ -50,6 +51,10 @@ class DoglitContainer extends React.Component {
 				<DoglitHeroImage
 					imgUrl={ this.props.selectedDoglitUrl }
 				/>
+				<div className="doglit-info">
+					<h3>{ this.state.breedName }</h3>
+					<h4>{ this.state.subBreedName }</h4>
+				</div>
 			</div>
 		);
 	};
