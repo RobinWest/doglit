@@ -1,9 +1,11 @@
 let React      = require('react');
 let dogService = require('../services/DogService');
 
-let BreedListContainer    = require('./BreedListContainer'),
-	DoglitContainer       = require('./DoglitContainer'),
-	DoglitSwitchContainer = require('./DoglitSwitchContainer');
+let BreedListContainer      = require('./BreedListContainer'),
+	DoglitContainer         = require('./DoglitContainer'),
+	DoglitSwitchContainer   = require('./DoglitSwitchContainer'),
+	NextDoglitContainer     = require('./NextDoglitContainer'),
+	PreviousDoglitContainer = require('./PreviousDoglitContainer');
 
 class MainContainer extends React.Component {
 	constructor(){
@@ -81,16 +83,14 @@ class MainContainer extends React.Component {
 		});
 	}
 
-	addRandomDoglit(switchToDoglit){
+	addRandomDoglit(){
 		let doglitPromise = this.fetchRandomDoglit();
 
-		doglitPromise
+		return doglitPromise
 			.then(response => {
 				this.addImageToCollection(response);
 
-				if(switchToDoglit === true)
-					this.updateSelectedDoglit(this.state.imageCollection.length - 1);
-
+				return response;
 			}, err => {
 				console.log(err);
 			});
@@ -110,40 +110,40 @@ class MainContainer extends React.Component {
 	}
 
 	render(){
-		let previousSwitchComponent,
-			nextSwitchComponent;
+		// let previousSwitchComponent,
+		// 	nextSwitchComponent;
 
-		if(this.state.imageCollection.length > 1){
-			previousSwitchComponent = (
-				<DoglitSwitchPrevious
-					selectedDoglitIndex={this.state.selectedDoglitIndex}
-					selectedBreed={this.state.selectedBreed}
-					imageCollection={this.state.imageCollection}
-					updateSelectedDoglit={this.updateSelectedDoglit}
-				/>
-			);
-		}
+		// if(this.state.imageCollection.length > 1){
+		// 	previousSwitchComponent = (
+		// 		<DoglitSwitchPrevious
+		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
+		// 			selectedBreed={this.state.selectedBreed}
+		// 			imageCollection={this.state.imageCollection}
+		// 			updateSelectedDoglit={this.updateSelectedDoglit}
+		// 		/>
+		// 	);
+		// }
 
-		if(!this.state.selectedBreed && this.state.selectedDoglitIndex >= this.state.imageCollection.length - 1){
-			nextSwitchComponent = (
-				<DoglitSwitchRandom
-					selectedDoglitIndex={this.state.selectedDoglitIndex}
-					selectedBreed={this.state.selectedBreed}
-					imageCollection={this.state.imageCollection}
-					updateSelectedDoglit={this.updateSelectedDoglit}
-					onAddRandomDoglit={this.addRandomDoglit}
-				/>
-			);
-		} else {
-			nextSwitchComponent = (
-				<DoglitSwitchNext
-					selectedDoglitIndex={this.state.selectedDoglitIndex}
-					selectedBreed={this.state.selectedBreed}
-					imageCollection={this.state.imageCollection}
-					updateSelectedDoglit={this.updateSelectedDoglit}
-				/>
-			);
-		}
+		// if(!this.state.selectedBreed && this.state.selectedDoglitIndex >= this.state.imageCollection.length - 1){
+		// 	nextSwitchComponent = (
+		// 		<DoglitSwitchRandom
+		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
+		// 			selectedBreed={this.state.selectedBreed}
+		// 			imageCollection={this.state.imageCollection}
+		// 			updateSelectedDoglit={this.updateSelectedDoglit}
+		// 			onAddRandomDoglit={this.addRandomDoglit}
+		// 		/>
+		// 	);
+		// } else {
+		// 	nextSwitchComponent = (
+		// 		<DoglitSwitchNext
+		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
+		// 			selectedBreed={this.state.selectedBreed}
+		// 			imageCollection={this.state.imageCollection}
+		// 			updateSelectedDoglit={this.updateSelectedDoglit}
+		// 		/>
+		// 	);
+		// }
 
 		return (
 			<div className="main-container">
@@ -163,18 +163,33 @@ class MainContainer extends React.Component {
 					/>
 				</section>
 				<section className="previous-area">
-					{ previousSwitchComponent }
+					{this.state.imageCollection.length > 1 &&
+						<PreviousDoglitContainer
+							selectedDoglitIndex={this.state.selectedDoglitIndex}
+							selectedBreed={this.state.selectedBreed}
+							imageCollection={this.state.imageCollection}
+							onUpdateSelectedDoglit={this.updateSelectedDoglit}
+						/>
+					}
+					{ /*previousSwitchComponent*/ }
 				</section>
 				<section className="next-area">
-					{ nextSwitchComponent }
+					<NextDoglitContainer
+						selectedDoglitIndex={this.state.selectedDoglitIndex}
+						selectedBreed={this.state.selectedBreed}
+						imageCollection={this.state.imageCollection}
+						onUpdateSelectedDoglit={this.updateSelectedDoglit}
+						onAddRandomDoglit={this.addRandomDoglit}
+					/>
+					{ /*nextSwitchComponent*/ }
 				</section>
 			</div>
 		);
 	};
 }
 
-const DoglitSwitchPrevious = DoglitSwitchContainer("previous");
-const DoglitSwitchNext     = DoglitSwitchContainer("next");
-const DoglitSwitchRandom   = DoglitSwitchContainer("random");
+// const DoglitSwitchPrevious = DoglitSwitchContainer("previous");
+// const DoglitSwitchNext     = DoglitSwitchContainer("next");
+// const DoglitSwitchRandom   = DoglitSwitchContainer("random");
 
 module.exports = MainContainer;
