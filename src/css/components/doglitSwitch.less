@@ -30,3 +30,30 @@
 		}
 	}
 }
+
+.example-transition-appear {
+	opacity: 0.01;
+}
+.example-transition-appear.example-transition-appear-active {
+	opacity: 1;
+	transition: opacity 5000ms ease-in;
+}
+
+
+.example-transition-enter {
+  opacity: 0.01;
+}
+
+.example-transition-enter.example-transition-enter-active {
+  opacity: 1;
+  transition: opacity 5000ms ease-in;
+}
+
+.example-transition-leave {
+  opacity: 1;
+}
+
+.example-transition-leave.example-transition-leave-active {
+  opacity: 0.01;
+  transition: opacity 3000ms ease-in;
+}

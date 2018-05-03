@@ -1,4 +1,5 @@
 let React = require('react');
+let CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
 
 require('../css/components/doglitSwitch.less');
 
@@ -79,7 +80,15 @@ class NextDoglitContainer extends React.Component {
 
 		return (
 			<div className={`doglit-switch-container doglit-switch-next`}>
-				{switchComponent}
+				<CSSTransitionGroup
+					transitionName="example-transition"
+					transitionAppear={true}
+					transitionAppearTimeout={5000}
+					transitionEnterTimeout={5000}
+					transitionLeaveTimeout={3000}
+				>
+					{switchComponent}
+				</CSSTransitionGroup>
 			</div>
 		);
 	};
