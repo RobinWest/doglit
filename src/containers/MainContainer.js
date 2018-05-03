@@ -3,7 +3,6 @@ let dogService = require('../services/DogService');
 
 let BreedListContainer      = require('./BreedListContainer'),
 	DoglitContainer         = require('./DoglitContainer'),
-	DoglitSwitchContainer   = require('./DoglitSwitchContainer'),
 	NextDoglitContainer     = require('./NextDoglitContainer'),
 	PreviousDoglitContainer = require('./PreviousDoglitContainer');
 
@@ -32,7 +31,7 @@ class MainContainer extends React.Component {
 
 	componentDidUpdate(prevProps, prevState){
 		if(prevState.selectedBreed !== this.state.selectedBreed)
-			this.fetchBreed(this.state.selectedBreed);
+			this.fetchAndSetBreed(this.state.selectedBreed);
 	}
 
 	fetchRandomDoglit(){
@@ -45,16 +44,15 @@ class MainContainer extends React.Component {
 
 			}, err => {
 				console.log(err);
-			}).then();
+			});
 	}
 
-	fetchBreed(breed){
+	fetchAndSetBreed(breed){
 		let self = this;
 
 		dogService
 			.getBreedImages(breed)
 			.then(response => {
-				// TODO should this straight up update?
 				self.updateImageCollection(response.data.message);
 
 			}, err => {
@@ -110,41 +108,6 @@ class MainContainer extends React.Component {
 	}
 
 	render(){
-		// let previousSwitchComponent,
-		// 	nextSwitchComponent;
-
-		// if(this.state.imageCollection.length > 1){
-		// 	previousSwitchComponent = (
-		// 		<DoglitSwitchPrevious
-		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
-		// 			selectedBreed={this.state.selectedBreed}
-		// 			imageCollection={this.state.imageCollection}
-		// 			updateSelectedDoglit={this.updateSelectedDoglit}
-		// 		/>
-		// 	);
-		// }
-
-		// if(!this.state.selectedBreed && this.state.selectedDoglitIndex >= this.state.imageCollection.length - 1){
-		// 	nextSwitchComponent = (
-		// 		<DoglitSwitchRandom
-		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
-		// 			selectedBreed={this.state.selectedBreed}
-		// 			imageCollection={this.state.imageCollection}
-		// 			updateSelectedDoglit={this.updateSelectedDoglit}
-		// 			onAddRandomDoglit={this.addRandomDoglit}
-		// 		/>
-		// 	);
-		// } else {
-		// 	nextSwitchComponent = (
-		// 		<DoglitSwitchNext
-		// 			selectedDoglitIndex={this.state.selectedDoglitIndex}
-		// 			selectedBreed={this.state.selectedBreed}
-		// 			imageCollection={this.state.imageCollection}
-		// 			updateSelectedDoglit={this.updateSelectedDoglit}
-		// 		/>
-		// 	);
-		// }
-
 		return (
 			<div className="main-container">
 				<section className="header-area">
@@ -171,7 +134,6 @@ class MainContainer extends React.Component {
 							onUpdateSelectedDoglit={this.updateSelectedDoglit}
 						/>
 					}
-					{ /*previousSwitchComponent*/ }
 				</section>
 				<section className="next-area">
 					<NextDoglitContainer
@@ -181,15 +143,10 @@ class MainContainer extends React.Component {
 						onUpdateSelectedDoglit={this.updateSelectedDoglit}
 						onAddRandomDoglit={this.addRandomDoglit}
 					/>
-					{ /*nextSwitchComponent*/ }
 				</section>
 			</div>
 		);
 	};
 }
-
-// const DoglitSwitchPrevious = DoglitSwitchContainer("previous");
-// const DoglitSwitchNext     = DoglitSwitchContainer("next");
-// const DoglitSwitchRandom   = DoglitSwitchContainer("random");
 
 module.exports = MainContainer;
