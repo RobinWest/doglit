@@ -1,5 +1,5 @@
 let React = require('react');
-let CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
+let CSSTransition = require('react-transition-group/CSSTransition');
 
 require('../css/components/doglitSwitch.less');
 
@@ -14,14 +14,27 @@ class NextDoglitContainer extends React.Component {
 		this.handleClick     = this.handleClick.bind(this);
 		this.getRandomDoglit = this.getRandomDoglit.bind(this);
 
-		// this.state = {
-		// 	loading: true,
-		// 	doglitImageUrl: ''
-		// };
+		this.state = {
+			bounceOut: false
+		};
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState){
+		console.log('getDerivedStateFromProps:');
+		console.log(nextProps.imageCollection.length);
+		console.log(nextProps);
+		console.log(prevState);
+
+		// return {bounceOut: true};
+		return null;
 	}
 
 	handleClick(newIndex){
 		this.props.onUpdateSelectedDoglit(newIndex);
+
+		this.setState({
+			bounceOut: true
+		});
 	}
 
 	getRandomDoglit(){
@@ -80,15 +93,18 @@ class NextDoglitContainer extends React.Component {
 
 		return (
 			<div className={`doglit-switch-container doglit-switch-next`}>
-				<CSSTransitionGroup
-					transitionName="example-transition"
-					transitionAppear={true}
-					transitionAppearTimeout={5000}
-					transitionEnterTimeout={5000}
-					transitionLeaveTimeout={3000}
+				<CSSTransition
+					in={this.state.bounceOut}
+					timeout={5000}
+					classNames="example-transition"
+					onEntered={() => {
+						this.setState({
+							bounceOut: false
+						});
+					}}
 				>
 					{switchComponent}
-				</CSSTransitionGroup>
+				</CSSTransition>
 			</div>
 		);
 	};
