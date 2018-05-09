@@ -15,7 +15,7 @@ class NextDoglitContainer extends React.Component {
 		this.getRandomDoglit = this.getRandomDoglit.bind(this);
 
 		this.state = {
-			bounceOut: false
+			slideIn: false
 		};
 	}
 
@@ -25,7 +25,7 @@ class NextDoglitContainer extends React.Component {
 		console.log(nextProps);
 		console.log(prevState);
 
-		// return {bounceOut: true};
+		// return {slideIn: true};
 		return null;
 	}
 
@@ -33,7 +33,7 @@ class NextDoglitContainer extends React.Component {
 		this.props.onUpdateSelectedDoglit(newIndex);
 
 		this.setState({
-			bounceOut: true
+			slideIn: true
 		});
 	}
 
@@ -94,12 +94,17 @@ class NextDoglitContainer extends React.Component {
 		return (
 			<div className={`doglit-switch-container doglit-switch-next`}>
 				<CSSTransition
-					in={this.state.bounceOut}
-					timeout={5000}
-					classNames="example-transition"
+					in={this.state.slideIn}
+					timeout={230}
+					classNames={{
+						exit        : 'slide-in',
+						exitActive  : 'slide-in-active',
+						enter       : 'bounce-out',
+						enterActive : 'bounce-out-active'
+					}}
 					onEntered={() => {
 						this.setState({
-							bounceOut: false
+							slideIn: false
 						});
 					}}
 				>

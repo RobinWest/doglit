@@ -31,29 +31,25 @@
 	}
 }
 
-.example-transition-appear {
-	opacity: 0.01;
+
+.slide-in {
+	opacity: 0;
+	transform: translateY(20em);
 }
-.example-transition-appear.example-transition-appear-active {
+
+.slide-in.slide-in-active {
 	opacity: 1;
-	transition: opacity 5000ms ease-in;
+	transform: translateY(0);
+	transition: opacity 100ms linear, transform 230ms ease-out;
 }
 
-
-.example-transition-enter {
-  opacity: 0.01;
+.bounce-out {
+	opacity: 1;
+	transform: translateX(0);
 }
 
-.example-transition-enter.example-transition-enter-active {
-  opacity: 1;
-  transition: opacity 5000ms ease-in;
-}
-
-.example-transition-leave {
-  opacity: 1;
-}
-
-.example-transition-leave.example-transition-leave-active {
-  opacity: 0.01;
-  transition: opacity 3000ms ease-in;
+.bounce-out.bounce-out-active {
+	opacity: 0;
+	transform: translateX(-10em);
+	transition: opacity 100ms linear, transform 230ms ease-out;
 }
