@@ -31,8 +31,6 @@ class BreedListContainer extends React.Component {
 	setBreedData(data){
 		let breedList = this.buildBreedList(data);
 
-		console.log(breedList);
-
 		this.setState({
 			breedList: breedList
 		});

@@ -3,6 +3,7 @@ let React = require('react');
 
 require('../css/components/doglit.less');
 
+let ImageContainer  = require('./ImageContainer');
 let DoglitHeroImage = require('../components/DoglitHeroImage');
 
 class DoglitContainer extends React.Component {
@@ -46,11 +47,15 @@ class DoglitContainer extends React.Component {
 	}
 
 	render(){
+		// const ImageLoader = ImageContainer(this.props.selectedDoglitUrl);
+
 		return (
 			<div className="doglit-container">
-				<DoglitHeroImage
-					imgUrl={ this.props.selectedDoglitUrl }
-				/>
+				<ImageContainer src={ this.props.selectedDoglitUrl }>
+					<DoglitHeroImage
+						imgUrl={ this.props.selectedDoglitUrl }
+					/>
+				</ImageContainer>
 				<div className="doglit-info">
 					<h3>{ this.state.breedName }</h3>
 					<h4>{ this.state.subBreedName }</h4>

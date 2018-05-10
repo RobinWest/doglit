@@ -20,12 +20,6 @@ class NextDoglitContainer extends React.Component {
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
-		console.log('getDerivedStateFromProps:');
-		console.log(nextProps.imageCollection.length);
-		console.log(nextProps);
-		console.log(prevState);
-
-		// return {slideIn: true};
 		return null;
 	}
 
