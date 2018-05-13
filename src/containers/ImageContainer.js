@@ -1,4 +1,4 @@
-let React = require('react');
+const React = require('react');
 
 class ImageContainer extends React.Component {
 	constructor(props){
@@ -8,7 +8,6 @@ class ImageContainer extends React.Component {
 
 		this.state = {
 			loading: false,
-			// src: this.props.src
 		};
 	}
 
@@ -26,11 +25,6 @@ class ImageContainer extends React.Component {
 	// }
 
 	componentDidUpdate(prevProps, prevState){
-		console.log(':::::');
-		console.log(this.props);
-		console.log(this.state);
-		console.log(':::::');
-
 		if(this.props.src === prevProps.src)
 			return;
 
@@ -53,7 +47,6 @@ class ImageContainer extends React.Component {
 	}
 
 	fetchImage(src){
-		console.log('fetch', src);
 		let image = new Image();
 
 		const promise = new Promise((resolve, reject) => {
@@ -61,7 +54,6 @@ class ImageContainer extends React.Component {
 				return reject('No image loaded:', image.src);
 
 			image.onload = event => {
-				console.log('onLoad:', event, image.src);
 				if(event && image.src)
 					resolve({e: event, src: image.src});
 				else
@@ -75,9 +67,14 @@ class ImageContainer extends React.Component {
 	}
 
 	render(){
-		let loading = this.state.loading;
+		const { loading }  = this.state,
+		      { children, loadingProp = 'loading' } = this.props;
 
-		return (!loading ? this.props.children : ( <p>Loading...</p> ));
+		const childrenWithProps = React.Children.map(children, child => 
+				React.cloneElement(child, { [loadingProp]: loading })
+			);
+
+		return ( childrenWithProps );
 	};
 }
 

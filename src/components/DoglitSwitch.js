@@ -1,4 +1,4 @@
-let React = require('react');
+const React = require('react');
 
 const DoglitSwitch = (WrappedIcon) => (props) => {
 	return (

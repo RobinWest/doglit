@@ -1,10 +1,8 @@
-let React = require('react');
-let DoglitDropdown = require('./DoglitDropdown');
-
+const React          = require('react');
+const DoglitDropdown = require('./DoglitDropdown');
 
 require('react-dropdown/style.css');
 require('../css/components/breedList.less');
-
 
 const BreedList = (props) => {
 	return (

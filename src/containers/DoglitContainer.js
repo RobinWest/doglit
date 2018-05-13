@@ -1,10 +1,10 @@
-let React = require('react');
-// let dogService = require('../services/DogService');
+const React = require('react');
+// const dogService = require('../services/DogService');
 
 require('../css/components/doglit.less');
 
-let ImageContainer  = require('./ImageContainer');
-let DoglitHeroImage = require('../components/DoglitHeroImage');
+const ImageContainer  = require('./ImageContainer');
+const DoglitHeroImage = require('../components/DoglitHeroImage');
 
 class DoglitContainer extends React.Component {
 	constructor(){
@@ -24,8 +24,6 @@ class DoglitContainer extends React.Component {
 
 		names = this.getNamesFromUrl(this.props.selectedDoglitUrl);
 
-		console.log('names', names);
-
 		this.setState(names);
 	}
 
@@ -41,14 +39,10 @@ class DoglitContainer extends React.Component {
 		let extraction = path.substring(0, path.indexOf('/')),
 			nameArray  = extraction.split('-');
 
-		console.log('nameArray', nameArray);
-
 		return {breedName: nameArray[0], subBreedName: nameArray[1]};
 	}
 
 	render(){
-		// const ImageLoader = ImageContainer(this.props.selectedDoglitUrl);
-
 		return (
 			<div className="doglit-container">
 				<ImageContainer src={ this.props.selectedDoglitUrl }>

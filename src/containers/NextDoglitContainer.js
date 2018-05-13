@@ -1,11 +1,11 @@
-let React = require('react');
-let CSSTransition = require('react-transition-group/CSSTransition');
+const React         = require('react');
+const CSSTransition = require('react-transition-group/CSSTransition');
 
 require('../css/components/doglitSwitch.less');
 
-let DoglitSwitch = require('../components/DoglitSwitch');
-let BackIcon     = require('../icons/BackIcon');
-let RandomIcon   = require('../icons/RandomIcon');
+const DoglitSwitch = require('../components/DoglitSwitch');
+const BackIcon     = require('../icons/BackIcon');
+const RandomIcon   = require('../icons/RandomIcon');
 
 class NextDoglitContainer extends React.Component {
 	constructor(props){

@@ -1,7 +1,7 @@
-let React      = require('react');
-let dogService = require('../services/DogService');
+const React      = require('react');
+const dogService = require('../services/DogService');
 
-let BreedList = require('../components/BreedList');
+const BreedList = require('../components/BreedList');
 
 class BreedListContainer extends React.Component {
 	constructor(props){

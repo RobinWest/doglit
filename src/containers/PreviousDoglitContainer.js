@@ -1,10 +1,10 @@
-let React = require('react');
+const React = require('react');
 
 require('../css/components/doglitSwitch.less');
 
-let DoglitSwitch = require('../components/DoglitSwitch');
-let ForwardIcon  = require('../icons/ForwardIcon');
-let RandomIcon   = require('../icons/RandomIcon');
+const DoglitSwitch = require('../components/DoglitSwitch');
+const ForwardIcon  = require('../icons/ForwardIcon');
+const RandomIcon   = require('../icons/RandomIcon');
 
 class PreviousDoglitContainer extends React.Component {
 	constructor(props){

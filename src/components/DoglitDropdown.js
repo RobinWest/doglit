@@ -1,4 +1,4 @@
-let React = require('react');
+const React = require('react');
 import Dropdown from 'react-dropdown';
 import classNames from 'classnames';
 

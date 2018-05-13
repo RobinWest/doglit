@@ -1,10 +1,10 @@
-let React      = require('react');
-let dogService = require('../services/DogService');
+const React      = require('react');
+const dogService = require('../services/DogService');
 
-let BreedListContainer      = require('./BreedListContainer'),
-	DoglitContainer         = require('./DoglitContainer'),
-	NextDoglitContainer     = require('./NextDoglitContainer'),
-	PreviousDoglitContainer = require('./PreviousDoglitContainer');
+const BreedListContainer      = require('./BreedListContainer'),
+	  DoglitContainer         = require('./DoglitContainer'),
+	  NextDoglitContainer     = require('./NextDoglitContainer'),
+	  PreviousDoglitContainer = require('./PreviousDoglitContainer');
 
 class MainContainer extends React.Component {
 	constructor(){
