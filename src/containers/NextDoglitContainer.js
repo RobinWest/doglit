@@ -53,7 +53,6 @@ class NextDoglitContainer extends React.Component {
 	render(){
 		let switchComponent;
 
-		// TODO I think I would rather pass in the icon as a prop
 		const SwitchWithBackIcon   = DoglitSwitch(BackIcon),
 			  SwitchWithRandomIcon = DoglitSwitch(RandomIcon),
 			  EmptyDoglitSwitch    = DoglitSwitch();
