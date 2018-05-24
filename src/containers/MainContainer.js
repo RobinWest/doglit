@@ -15,7 +15,7 @@ class MainContainer extends React.Component {
 		this.addRandomDoglit      = this.addRandomDoglit.bind(this);
 
 		this.state = {
-			selectedBreed: null,
+			selectedBreed: '',
 			selectedDoglitIndex: null,
 			imageCollection: []
 		};

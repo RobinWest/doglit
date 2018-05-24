@@ -44,15 +44,14 @@ class BreedListContainer extends React.Component {
 			breedList.push({
 				value: breed,
 				label: breed,
-				img: 'https://dog.ceo/api/img/leonberg/n02111129_253.jpg'
 			});
 		}
 
 		return breedList;
 	}
 
-	onSelectBreed(selection){
-		this.props.onSelectBreed(selection.value);
+	onSelectBreed(event){
+		this.props.onSelectBreed(event.target.value);
 	}
 
 	render(){
