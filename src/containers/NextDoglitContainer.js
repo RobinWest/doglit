@@ -1,4 +1,5 @@
 const React         = require('react');
+const PropTypes     = require('prop-types');
 const CSSTransition = require('react-transition-group/CSSTransition');
 
 require('../css/components/doglitSwitch.less');
@@ -87,7 +88,7 @@ class NextDoglitContainer extends React.Component {
 		return (
 			<div className={`doglit-switch-container doglit-switch-next`}>
 				<CSSTransition
-					in={this.state.slideIn}
+					in={ this.state.slideIn }
 					timeout={230}
 					classNames={{
 						exit        : 'slide-in next',
@@ -106,6 +107,14 @@ class NextDoglitContainer extends React.Component {
 			</div>
 		);
 	};
+}
+
+NextDoglitContainer.propTypes = {
+	selectedDoglitIndex: PropTypes.number,
+	selectedBreed: PropTypes.string.isRequired,
+	imageCollection: PropTypes.array.isRequired,
+	onUpdateSelectedDoglit: PropTypes.func.isRequired,
+	onAddRandomDoglit: PropTypes.func.isRequired,
 }
 
 module.exports = NextDoglitContainer;

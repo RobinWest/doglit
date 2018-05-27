@@ -1,4 +1,5 @@
 const React      = require('react');
+const PropTypes  = require('prop-types');
 const dogService = require('../services/DogService');
 
 const BreedList = require('../components/BreedList');
@@ -11,7 +12,7 @@ class BreedListContainer extends React.Component {
 
 		this.state = {
 			loading: true,
-			breedList: {}
+			breedList: []
 		};
 	}
 
@@ -67,5 +68,10 @@ class BreedListContainer extends React.Component {
 		);
 	};
 }
+
+BreedListContainer.propTypes = {
+	onSelectBreed: PropTypes.func.isRequired,
+	selectedBreed: PropTypes.string.isRequired,
+};
 
 module.exports = BreedListContainer;

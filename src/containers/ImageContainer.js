@@ -1,4 +1,5 @@
-const React = require('react');
+const React     = require('react');
+const PropTypes = require('prop-types');
 
 class ImageContainer extends React.Component {
 	constructor(props){
@@ -60,6 +61,12 @@ class ImageContainer extends React.Component {
 
 		return ( childrenWithProps );
 	};
+}
+
+ImageContainer.propTypes = {
+	src: PropTypes.string,
+	children: PropTypes.element,
+	loadingProp: PropTypes.string,
 }
 
 module.exports = ImageContainer;

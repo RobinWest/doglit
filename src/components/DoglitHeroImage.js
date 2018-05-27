@@ -1,5 +1,6 @@
-const React           = require('react');
-const CSSTransition   = require('react-transition-group/CSSTransition');
+const React         = require('react');
+const PropTypes     = require('prop-types');
+const CSSTransition = require('react-transition-group/CSSTransition');
 
 const DoglitHeroImage = (props) => {
 	return (
@@ -19,6 +20,12 @@ const DoglitHeroImage = (props) => {
 			</CSSTransition>
 		</div>
 	);
+}
+
+DoglitHeroImage.propTypes = {
+	loading: PropTypes.bool,
+	animationDirection: PropTypes.string,
+	imgUrl: PropTypes.string,
 }
 
 module.exports = DoglitHeroImage;

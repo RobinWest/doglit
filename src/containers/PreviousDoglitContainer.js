@@ -1,4 +1,5 @@
 const React         = require('react');
+const PropTypes     = require('prop-types');
 const CSSTransition = require('react-transition-group/CSSTransition');
 
 require('../css/components/doglitSwitch.less');
@@ -84,5 +85,13 @@ class PreviousDoglitContainer extends React.Component {
 		);
 	};
 }
+
+PreviousDoglitContainer.propTypes = {
+	selectedDoglitIndex: PropTypes.number,
+	selectedBreed: PropTypes.string.isRequired,
+	imageCollection: PropTypes.array.isRequired,
+	onUpdateSelectedDoglit: PropTypes.func.isRequired,
+}
+
 
 module.exports = PreviousDoglitContainer;

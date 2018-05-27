@@ -1,4 +1,5 @@
-const React          = require('react');
+const React     = require('react');
+const PropTypes = require('prop-types');
 
 require('react-dropdown/style.css');
 require('../css/components/breedList.less');
@@ -18,6 +19,13 @@ const BreedList = (props) => {
 
 		</div>
 	);
+}
+
+BreedList.propTypes = {
+	loading: PropTypes.bool.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	selectedBreed: PropTypes.string.isRequired,
+	breedList: PropTypes.array.isRequired,
 }
 
 module.exports = BreedList;

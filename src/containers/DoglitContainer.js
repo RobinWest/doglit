@@ -1,4 +1,5 @@
-const React = require('react');
+const React     = require('react');
+const PropTypes = require('prop-types');
 // const dogService = require('../services/DogService');
 
 require('../css/components/doglit.less');
@@ -62,6 +63,10 @@ class DoglitContainer extends React.Component {
 			</div>
 		);
 	};
+}
+
+DoglitContainer.propTypes = {
+	selectedDoglitUrl: PropTypes.string
 }
 
 module.exports = DoglitContainer;

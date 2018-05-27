@@ -8,12 +8,6 @@ class ForwardIcon extends React.Component {
 		viewBox: '0 0 32 32'
 	};
 
-	static propTypes = {
-		width: PropTypes.number,
-		height: PropTypes.number,
-		viewBox: PropTypes.string
-	};
-
 	render(){
 		return (
 			<svg className={`icon icon-forward ${this.props.className}`} viewBox={this.props.viewBox} /*width={this.props.width} height={this.props.height}*/ xmlns="http://www.w3.org/2000/svg" aria-labelledby="title">
@@ -23,5 +17,13 @@ class ForwardIcon extends React.Component {
 		);
 	};
 }
+
+ForwardIcon.propTypes = {
+	width: PropTypes.number,
+	height: PropTypes.number,
+	viewBox: PropTypes.string,
+	className: PropTypes.string,
+}
+
 
 module.exports = ForwardIcon;
