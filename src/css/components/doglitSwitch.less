@@ -50,6 +50,12 @@
 
 .bounce-out.bounce-out-active {
 	opacity: 0;
-	transform: translateX(-10em);
 	transition: opacity 100ms linear, transform 230ms ease-out;
+
+	&.next{
+		transform: translateX(-10em);
+	}
+	&.previous{
+		transform: translateX(10em);
+	}
 }

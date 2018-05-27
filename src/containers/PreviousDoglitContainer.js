@@ -1,4 +1,5 @@
-const React = require('react');
+const React         = require('react');
+const CSSTransition = require('react-transition-group/CSSTransition');
 
 require('../css/components/doglitSwitch.less');
 
@@ -12,14 +13,17 @@ class PreviousDoglitContainer extends React.Component {
 
 		this.handleClick     = this.handleClick.bind(this);
 
-		// this.state = {
-		// 	loading: true,
-		// 	doglitImageUrl: ''
-		// };
+		this.state = {
+			slideIn: false
+		};
 	}
 
 	handleClick(newIndex){
-		this.props.onUpdateSelectedDoglit(newIndex);
+		this.props.onUpdateSelectedDoglit(newIndex, 'previous');
+
+		this.setState({
+			slideIn: true
+		});
 	}
 
 	getPreviousDoglit(){
@@ -59,7 +63,23 @@ class PreviousDoglitContainer extends React.Component {
 
 		return (
 			<div className={`doglit-switch-container doglit-switch-previous`}>
-				{switchComponent}
+				<CSSTransition
+					in={this.state.slideIn}
+					timeout={230}
+					classNames={{
+						exit        : 'slide-in previous',
+						exitActive  : 'slide-in-active previous',
+						enter       : 'bounce-out previous',
+						enterActive : 'bounce-out-active previous'
+					}}
+					onEntered={() => {
+						this.setState({
+							slideIn: false
+						});
+					}}
+				>
+					{switchComponent}
+				</CSSTransition>
 			</div>
 		);
 	};

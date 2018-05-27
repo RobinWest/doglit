@@ -24,7 +24,7 @@ class NextDoglitContainer extends React.Component {
 	}
 
 	handleClick(newIndex){
-		this.props.onUpdateSelectedDoglit(newIndex);
+		this.props.onUpdateSelectedDoglit(newIndex, 'next');
 
 		this.setState({
 			slideIn: true
@@ -90,10 +90,10 @@ class NextDoglitContainer extends React.Component {
 					in={this.state.slideIn}
 					timeout={230}
 					classNames={{
-						exit        : 'slide-in',
-						exitActive  : 'slide-in-active',
-						enter       : 'bounce-out',
-						enterActive : 'bounce-out-active'
+						exit        : 'slide-in next',
+						exitActive  : 'slide-in-active next',
+						enter       : 'bounce-out next',
+						enterActive : 'bounce-out-active next'
 					}}
 					onEntered={() => {
 						this.setState({

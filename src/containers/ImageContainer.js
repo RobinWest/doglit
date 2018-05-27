@@ -4,25 +4,10 @@ class ImageContainer extends React.Component {
 	constructor(props){
 		super(props);
 
-		console.log(this.props);
-
 		this.state = {
 			loading: false,
 		};
 	}
-
-	// static getDerivedStateFromProps(nextProps, prevState){
-	// 	console.log('getDerivedStateFromProps:');
-	// 	console.log(nextProps);
-	// 	console.log(prevState);
-
-	// 	let state = null;
-
-	// 	if(prevState.src !== nextProps.src)
-	// 		state = { ...nextProps };
-
-	// 	return state;
-	// }
 
 	componentDidUpdate(prevProps, prevState){
 		if(this.props.src === prevProps.src)
@@ -34,7 +19,6 @@ class ImageContainer extends React.Component {
 
 		this.fetchImage(this.props.src)
 			.then(response => {
-				console.log('resolved!', response);
 
 				this.setState({
 					loading: false,

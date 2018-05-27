@@ -48,11 +48,16 @@ class DoglitContainer extends React.Component {
 				<ImageContainer src={ this.props.selectedDoglitUrl }>
 					<DoglitHeroImage
 						imgUrl={ this.props.selectedDoglitUrl }
+						animationDirection={ this.props.animationDirection }
 					/>
 				</ImageContainer>
 				<div className="doglit-info">
-					<h3>{ this.state.breedName }</h3>
-					<h4>{ this.state.subBreedName }</h4>
+					<dl>
+						<dt>{ this.state.breedName }</dt>
+						{this.state.subBreedName && 
+							<dt>{ this.state.subBreedName }</dt>
+						}
+					</dl>
 				</div>
 			</div>
 		);

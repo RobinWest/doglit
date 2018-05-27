@@ -75,9 +75,10 @@ class MainContainer extends React.Component {
 		this.updateSelectedDoglit(0);
 	}
 
-	updateSelectedDoglit(index){
+	updateSelectedDoglit(index, animationDirection = ''){
 		this.setState({
-			selectedDoglitIndex: index
+			selectedDoglitIndex: index,
+			animationDirection: animationDirection
 		});
 	}
 
@@ -123,6 +124,7 @@ class MainContainer extends React.Component {
 				<section className="doglit-area">
 					<DoglitContainer
 						selectedDoglitUrl={this.state.imageCollection[this.state.selectedDoglitIndex]}
+						animationDirection={this.state.animationDirection}
 					/>
 				</section>
 				<section className="previous-area">
