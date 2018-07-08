@@ -1,9 +1,8 @@
-let React         = require('react');
-let ReactDOM      = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './css/index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 
-let MainContainer = require('./containers/MainContainer');
-
-require('./css/main.less');
-require('./css/icons.less');
-
-ReactDOM.render(<MainContainer />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();

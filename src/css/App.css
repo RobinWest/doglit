@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900');
+
+/* Colours
+Blue  : #5CACE5;
+Red   : #E15554;
+Green : #3BB273;
+Cream : #EFE8C4;
+Slate : #4C5B5C;
+*/
+
+.App {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  height: 100%;
+
+  background-color: #5CACE5;
+}
+
+.App__header {
+  padding: 2em;
+}
+
+.App__header--title {
+  font-size: 6em;
+  color: #E15554;
+
+  margin: 0;
+
+  -webkit-text-stroke: 2px #5CACE5;
+  text-shadow: 4px 4px #EFE8C4;
+}
