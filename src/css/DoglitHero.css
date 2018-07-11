@@ -1,0 +1,88 @@
+/* Colours
+Blue  : #5CACE5;
+Red   : #E15554;
+Green : #3BB273;
+Cream : #EFE8C4;
+Slate : #4C5B5C;
+*/
+
+.DoglitHero{
+  width: 100%;
+}
+
+.DoglitHero__loading{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.DoglitHero__loading p{
+  margin: 0;
+}
+
+.DoglitHero__image-container{
+  position: relative;
+  padding-top: 86.95%;
+
+  background-color: #fff;
+}
+
+.DoglitHero__image{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.DoglitHero__title-container{
+  background-color: #EFE8C4;
+  padding: 0 20px;
+}
+.DoglitHero__title{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+
+  color: #E15554;
+}
+.DoglitHero__title h3,h4{
+  margin: 0;
+}
+
+.DoglitHero__title h3{
+  font-size: 2.6em;
+  margin-right: 0.2em;
+}
+.DoglitHero__title h4{
+  font-size: 2em;
+  font-weight: normal;
+}
+
+@media screen and (min-width: 35.5em){
+  .DoglitHero{
+  }
+
+  .DoglitHero__image{
+    margin: 10px 10px 20px 10px;
+  }
+}
+@media screen and (min-width: 48em){
+  
+}
+@media screen and (min-width: 64em){
+  
+}
+@media screen and (min-width: 80em){
+  
+}

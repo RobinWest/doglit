@@ -3,6 +3,9 @@ import { observer, inject } from 'mobx-react';
 
 import './css/App.css';
 
+import ImageLoader from './container/ImageLoader'
+import DoglitHero from './component/DoglitHero';
+
 @inject('viewStore')
 @observer class App extends Component {
   constructor(props){
@@ -15,14 +18,21 @@ import './css/App.css';
   render() {
     return (
       <div className="App">
-        <header className="App__header">
-          <h1 className="App__header--title">DOGLIT</h1>
-        </header>
-        {this.props.viewStore.currentView.currentDogUrl.state}
-        {this.props.viewStore.currentView.currentDogUrl.value}
-        {/* breed select */}
-        {/* hero image */}
-        {/* doglit selectors */}
+        <div className="App__container">
+          <header className="App__header">
+            <h1 className="App__header--title">DOGLIT</h1>
+          </header>
+
+          <div className="App__hero">
+            <ImageLoader state={this.props.viewStore.currentView.currentDogUrl.state} imageUrl={this.props.viewStore.currentView.currentDogUrl.value}>
+              <DoglitHero />
+            </ImageLoader>
+          </div>
+
+          <div className="App__controls">
+            [previous] [next]
+          </div>
+        </div>
       </div>
     );
   }

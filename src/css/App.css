@@ -13,14 +13,25 @@ Slate : #4C5B5C;
   height: 100%;
 
   background-color: #5CACE5;
+
+}
+
+.App__container{
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .App__header {
-  padding: 2em;
+  flex: 0 1 auto;
+  padding: 2em 0;
 }
 
 .App__header--title {
-  font-size: 6em;
+  font-size: 4em;
   font-weight: 900;
   color: #E15554;
 
@@ -28,4 +39,38 @@ Slate : #4C5B5C;
 
   -webkit-text-stroke: 2px #5CACE5;
   text-shadow: 4px 4px #EFE8C4;
+}
+
+.App__hero{
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.App__controls{
+  flex: 1 1 auto;
+}
+
+@media screen and (min-width: 35.5em){
+  .App__container {
+    max-width: 24em;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 48em){
+  .App__container {
+    max-width: 28em;
+  }
+  .App__header--title {
+    font-size: 5em;
+  }
+
+}
+@media screen and (min-width: 64em){
+
+}
+@media screen and (min-width: 80em){
+
 }
