@@ -10,7 +10,6 @@ Slate : #4C5B5C;
 
 .App {
   font-family: 'Nunito', sans-serif;
-  font-weight: 900;
   height: 100%;
 
   background-color: #5CACE5;
@@ -22,6 +21,7 @@ Slate : #4C5B5C;
 
 .App__header--title {
   font-size: 6em;
+  font-weight: 900;
   color: #E15554;
 
   margin: 0;
