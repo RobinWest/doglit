@@ -12,7 +12,6 @@ export class ViewStore {
   constructor(service, Store){
     this.service           = service;
     this.doglitStore       = new Store();
-    // this.randomDoglitStore = new Store();
 
     // this.cache = {};
   }
@@ -21,11 +20,15 @@ export class ViewStore {
     const currentDogPromise = this.service.fetchRandomDog().then(res => res.message),
           nextDogPromise = this.service.fetchRandomDog().then(res => res.message);
 
-    this.currentView = {
-      currentDogUrl: fromPromise(currentDogPromise),
-      nextDogUrl: fromPromise(nextDogPromise),
-      previousDogUrl: fromPromise(new Promise((r, reject) => reject(null)))
-    };
+    Promise
+      .all([currentDogPromise, nextDogPromise])
+      .then(res => {
+        this.doglitStore.collection = res;
+      });
+
+    this.currentView.currentDogUrl  = fromPromise(currentDogPromise);
+    this.currentView.nextDogUrl     = fromPromise(nextDogPromise);
+    this.currentView.previousDogUrl = fromPromise(new Promise((r, reject) => reject(null)));
   }
 
   @action updateCollection(collection){
@@ -35,21 +38,27 @@ export class ViewStore {
   }
 
   @action updateDog(newDogPromise = new Promise((r, reject) => reject(null))){
-    this.currentView = {
-      currentDogUrl: fromPromise(newDogPromise),
-      nextDogUrl: fromPromise(this.doglitStore.nextDogUrl(newDogPromise)),
-      previousDogUrl: fromPromise(this.doglitStore.previousDogUrl(newDogPromise))
-    };
+    this.currentView.currentDogUrl  = fromPromise(newDogPromise);
+    this.currentView.nextDogUrl     = fromPromise(this.doglitStore.nextDogUrl(newDogPromise));
+    this.currentView.previousDogUrl = fromPromise(this.doglitStore.previousDogUrl(newDogPromise));
   }
 
   @action nextDog(){
-    const newDogPromise = this.doglitStore.getNextDog(this.currentView.currentDogUrl);
+    console.log(this.currentView.currentDogUrl.value);
+    console.log(this.doglitStore.collection[this.doglitStore.collection.length - 2]);
+
+    if(this.currentView.selectedBreed === null && this.currentView.currentDogUrl.value === this.doglitStore.collection[this.doglitStore.collection.length - 2]){
+      const nextDogPromise = this.service.fetchRandomDog().then(res => res.message);
+      this.doglitStore.addDogToCollection(nextDogPromise);
+    }
+
+    const newDogPromise = this.doglitStore.nextDogUrl(this.currentView.currentDogUrl);
 
     this.updateDog(newDogPromise);
   }
 
   @action previousDog(){
-    const newDogPromise = this.doglitStore.getPreviousDog(this.currentView.currentDogUrl);
+    const newDogPromise = this.doglitStore.previousDogUrl(this.currentView.currentDogUrl);
 
     this.updateDog(newDogPromise);
   }

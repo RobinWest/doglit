@@ -15,31 +15,43 @@ class ImageLoader extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(this.props.state !== 'fulfilled' || this.props.imageUrl === prevProps.imageUrl)
+    if(this.props.imageUrl === prevProps.imageUrl)
       return;
 
     this.setState({
       state: 'loading'
     });
 
-    const image = new Image();
-
-    image.onload = event => {
-      if(event && image.src){
+    switch(this.props.state){
+      case 'rejected':
         this.setState({
-          src: image.src,
-          state: 'complete'
+          src: this.props.imageUrl,
+          state: this.props.state
         });
+        break;
 
-      }else{
-        this.setState({
-          src: null,
-          state: 'failed'
-        });
-      }
+      case 'fulfilled':
+        const image = new Image();
+
+        image.onload = event => {
+          if(event && image.src){
+            this.setState({
+              src: image.src,
+              state: 'complete'
+            });
+
+          }else{
+            this.setState({
+              src: null,
+              state: 'failed'
+            });
+          }
+        }
+
+        image.src = this.props.imageUrl;
+        break;
     }
 
-    image.src = this.props.imageUrl;
   }
 
   render() {

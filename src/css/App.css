@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900');
 
 /* Colours
+https://coolors.co/5cace5-e15554-efe8c4-3bb273-4c5b5c
 Blue  : #5CACE5;
 Red   : #E15554;
-Green : #3BB273;
+Green : #3BB273; ^#4CB97F
 Cream : #EFE8C4;
 Slate : #4C5B5C;
 */
@@ -51,6 +52,10 @@ Slate : #4C5B5C;
 
 .App__controls{
   flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media screen and (min-width: 35.5em){

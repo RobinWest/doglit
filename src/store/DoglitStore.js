@@ -2,21 +2,30 @@ import { observable, computed, action } from 'mobx';
 import { fromPromise } from 'mobx-utils';
 
 export class DoglitStore {
-  @observable collection = [];
-  @observable breed      = null;
-  @observable subBreed   = null;
+  @observable collection    = [];
+  @observable addInProgress = false;
+  @observable addPromise    = null;
 
   constructor(service){
     this.service = service;
+  }
 
-    // TODO reaction on breed change
+  @computed get length(){
+    return this.collection.length;
   }
 
   @action nextDogUrl(currentDogPromise){
     return new Promise((resolve, reject) => {
-      currentDogPromise
+      let addDogPromise = new Promise(resolve => resolve());
+
+      if(this.addInProgress)
+        addDogPromise = this.addPromise;
+
+      Promise
+        .all([currentDogPromise, addDogPromise])
         .then(res => {
-          let nextIndex = this.collection.indexOf(res);
+          console.log(res);
+          let nextIndex = this.collection.indexOf(res[0]);
 
           if(nextIndex === -1)
             reject('Invalid current doglit.');
@@ -24,9 +33,25 @@ export class DoglitStore {
           nextIndex = this.getNextIndex(nextIndex);
 
           resolve(this.collection[nextIndex]);
+
         }, err => {
+          console.log(err);
           reject(err);
         });
+
+      // currentDogPromise
+      //   .then(res => {
+      //     let nextIndex = this.collection.indexOf(res);
+
+      //     if(nextIndex === -1)
+      //       reject('Invalid current doglit.');
+
+      //     nextIndex = this.getNextIndex(nextIndex);
+
+      //     resolve(this.collection[nextIndex]);
+      //   }, err => {
+      //     reject(err);
+      //   });
     });
   }
 
@@ -48,17 +73,32 @@ export class DoglitStore {
     });
   }
 
+  @action addDogToCollection(newDogPromise = new Promise((r, reject) => reject(null))){
+    this.addInProgress = true;
+    this.addPromise = newDogPromise;
+
+    newDogPromise
+      .then(res => {
+        this.collection.push(res);
+
+        this.addPromise    = null;
+        this.addInProgress = false;
+      });
+  }
+
   @action getNextIndex(index){
+    index++;
+
     return index % this.collection.length;
   }
 
   @action getPreviousIndex(index){
-    let newIndex = index - 1;
+    index--;
 
-    if(newIndex < 0)
-      newIndex = 0;
+    if(index < 0)
+      index = (this.collection.length - 1);
 
-    return newIndex;
+    return index;
   }
 }
 

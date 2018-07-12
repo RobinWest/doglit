@@ -1,0 +1,73 @@
+/* Colours
+https://coolors.co/5cace5-e15554-efe8c4-3bb273-4c5b5c
+Blue  : #5CACE5;
+Red   : #E15554;
+Green : #3BB273; ^#4CB97F
+Cream : #EFE8C4;
+Slate : #4C5B5C;
+*/
+
+.DoglitSelector{
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 3em;
+  width: 45%;
+
+  padding: 0.375em;
+
+  background-color: #3BB273;
+  border-radius: 6em;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+
+  transition: box-shadow 180ms linear;
+}
+.DoglitSelector:hover{
+  background-color: #4CB97F;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+.DoglitSelector--next{
+  flex-direction: row-reverse;
+}
+
+.DoglitSelector__image-container{
+  
+}
+.DoglitSelector__image{
+  width: 2.5em;
+  height: 2.5em;
+
+  border-radius: 100%;
+  border: 2px solid #fff;
+
+  background-color: #fff;
+}
+
+.DoglitSelector__label{
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+.DoglitSelector--previous .DoglitSelector__label{
+  padding-right: 1.4em;
+}
+.DoglitSelector--next .DoglitSelector__label{
+  padding-left: 1.4em;
+}
+
+@media screen and (min-width: 35.5em){
+}
+@media screen and (min-width: 48em){
+  
+}
+@media screen and (min-width: 64em){
+  
+}
+@media screen and (min-width: 80em){
+  
+}
