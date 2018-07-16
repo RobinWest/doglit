@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 
 import '../css/DoglitSelectorImage.css';
 
+import BoneIcon from '../icon/BoneIcon';
+
+// const DoglitSelectorImage = (props) => (
+//   <div className={`DoglitSelectorImage DoglitSelectorImage--loading`}>
+//       <BoneIcon />
+//   </div>
+// );
 const DoglitSelectorImage = (props) => (
-  <div className="DoglitSelectorImage">
+  <div className={`DoglitSelectorImage ${(props.state === 'pending' || props.state === 'loading') ? 'DoglitSelectorImage--loading' : ''}`}>
     {(props.state === 'pending' || props.state === 'loading') && 
-      <p>...</p>
+      <BoneIcon />
     }
     {props.state === 'complete' && 
       <div className="DoglitSelectorImage__image" style={ {backgroundImage: `url(${props.imageUrl})`} }></div>

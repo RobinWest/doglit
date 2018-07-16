@@ -3,7 +3,7 @@ import { fromPromise } from 'mobx-utils';
 
 export class DoglitStore {
   @observable collection    = [];
-  @observable addInProgress = false;
+  // @observable addInProgress = false;
   @observable addPromise    = null;
 
   constructor(service){
@@ -18,11 +18,8 @@ export class DoglitStore {
     return new Promise((resolve, reject) => {
       let addDogPromise = new Promise(resolve => resolve());
 
-      if(this.addInProgress)
-        addDogPromise = this.addPromise;
-
       Promise
-        .all([currentDogPromise, addDogPromise])
+        .all([currentDogPromise, this.addPromise])
         .then(res => {
           console.log(res);
           let nextIndex = this.collection.indexOf(res[0]);
@@ -38,20 +35,6 @@ export class DoglitStore {
           console.log(err);
           reject(err);
         });
-
-      // currentDogPromise
-      //   .then(res => {
-      //     let nextIndex = this.collection.indexOf(res);
-
-      //     if(nextIndex === -1)
-      //       reject('Invalid current doglit.');
-
-      //     nextIndex = this.getNextIndex(nextIndex);
-
-      //     resolve(this.collection[nextIndex]);
-      //   }, err => {
-      //     reject(err);
-      //   });
     });
   }
 
@@ -74,7 +57,7 @@ export class DoglitStore {
   }
 
   @action addDogToCollection(newDogPromise = new Promise((r, reject) => reject(null))){
-    this.addInProgress = true;
+    // this.addInProgress = true;
     this.addPromise = newDogPromise;
 
     newDogPromise
@@ -82,7 +65,7 @@ export class DoglitStore {
         this.collection.push(res);
 
         this.addPromise    = null;
-        this.addInProgress = false;
+        // this.addInProgress = false;
       });
   }
 
