@@ -19,7 +19,7 @@ Slate : #4C5B5C;
   transform: rotate(-45deg);
 }
 .DoglitSelectorImage--loading .icon-bone{
-  animation: loadingSway 900ms infinite;
+  animation: loadingSway 860ms ease infinite;
 }
 
 .DoglitSelectorImage__image{
@@ -56,7 +56,7 @@ Slate : #4C5B5C;
   }
 
   30%{
-    transform: rotate(-65deg) scale(1.1);
+    transform: rotate(-60deg) scale(1.05);
   }
 
   60%{

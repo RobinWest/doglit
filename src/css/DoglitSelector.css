@@ -8,6 +8,16 @@ Slate : #4C5B5C;
 */
 
 .DoglitSelector{
+  /* button resets */
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  -webkit-user-select: none; /* for button */
+     -moz-user-select: none;
+      -ms-user-select: none;
+
   cursor: pointer;
 
   display: flex;
@@ -18,7 +28,7 @@ Slate : #4C5B5C;
   height: 3em;
   width: 45%;
 
-  padding: 0.375em;
+  padding: 0 0.375em;
 
   background-color: #3BB273;
   border-radius: 6em;
@@ -26,10 +36,17 @@ Slate : #4C5B5C;
 
   transition: box-shadow 180ms linear;
 }
-.DoglitSelector:hover{
+.DoglitSelector:hover:enabled,
+.DoglitSelector:focus:enabled{
+  outline: none;
   background-color: #4CB97F;
   box-shadow: 0 5px 12px rgba(0,0,0,0.3);
 }
+.DoglitSelector:disabled{
+  /*cursor: not-allowed;*/
+  opacity: 0.6;
+}
+
 .DoglitSelector--next{
   flex-direction: row-reverse;
 }

@@ -47,6 +47,7 @@ export class ViewStore {
     console.log(this.currentView.currentDogUrl.value);
     console.log(this.doglitStore.collection[this.doglitStore.collection.length - 2]);
 
+    // TODO this makes two calls - tidy up
     if(this.currentView.selectedBreed === null && this.currentView.currentDogUrl.value === this.doglitStore.collection[this.doglitStore.collection.length - 2]){
       const nextDogPromise = this.service.fetchRandomDog().then(res => res.message);
       this.doglitStore.addDogToCollection(nextDogPromise);

@@ -7,7 +7,7 @@ import DoglitSelectorImage from './DoglitSelectorImage';
 import '../css/DoglitSelector.css';
 
 const DoglitSelector = (props) => (
-  <div className={`DoglitSelector DoglitSelector--${props.type}`} onClick={props.onClick}>
+  <button className={`DoglitSelector DoglitSelector--${props.type}`} onClick={props.onClick} disabled={props.imageState !== 'fulfilled'}>
     <div className="DoglitSelector__image-container">
       <div className="DoglitSelector__image">
         <ImageLoader state={props.imageState} imageUrl={props.imageUrl}>
@@ -18,7 +18,7 @@ const DoglitSelector = (props) => (
     <div className="DoglitSelector__label-container">
       <span className="DoglitSelector__label">{props.type}</span>
     </div>
-  </div>
+  </button>
 );
 
 DoglitSelector.propTypes = {

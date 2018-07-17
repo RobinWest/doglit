@@ -21,6 +21,8 @@ export class DoglitStore {
       Promise
         .all([currentDogPromise, this.addPromise])
         .then(res => {
+          // FIXME minor bug in here that if you click previous before this resolves,
+          //  it'll display the wrong "next" dog because it's out of sync.
           console.log(res);
           let nextIndex = this.collection.indexOf(res[0]);
 
