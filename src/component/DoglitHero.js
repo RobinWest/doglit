@@ -26,6 +26,8 @@ const DoglitHero = (props) => (
 );
 
 DoglitHero.propTypes = {
+  state: PropTypes.string,
+  imageUrl: PropTypes.string,
 };
 
 export default DoglitHero;

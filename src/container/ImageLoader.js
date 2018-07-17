@@ -23,6 +23,7 @@ class ImageLoader extends Component {
     });
 
     switch(this.props.state){
+      // TODO could be default case
       case 'rejected':
         this.setState({
           src: this.props.imageUrl,
@@ -49,6 +50,13 @@ class ImageLoader extends Component {
         }
 
         image.src = this.props.imageUrl;
+        break;
+
+      default:
+        this.setState({
+          src: null,
+          state: this.props.state
+        });
         break;
     }
 

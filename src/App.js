@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import './css/App.css';
 
+import BreedSelect from './component/BreedSelect';
 import ImageLoader from './container/ImageLoader';
 import DoglitHero from './component/DoglitHero';
 import DoglitSelector from './component/DoglitSelector';
@@ -12,11 +13,17 @@ import DoglitSelector from './component/DoglitSelector';
   constructor(props){
     super(props);
 
+    this.handleSelectBreed           = this.handleSelectBreed.bind(this);
     this.handleClickSelectorNext     = this.handleClickSelectorNext.bind(this);
     this.handleClickSelectorPrevious = this.handleClickSelectorPrevious.bind(this);
 
+    props.viewStore.getBreedList();
     props.viewStore.initRandom();
     // props.viewStore.selectBreed('beagle');
+  }
+
+  handleSelectBreed(e){
+    this.props.viewStore.updateBreed(e.target.value);
   }
 
   handleClickSelectorNext(){
@@ -33,6 +40,15 @@ import DoglitSelector from './component/DoglitSelector';
           <header className="App__header">
             <h1 className="App__header--title">DOGLIT</h1>
           </header>
+
+          <div className="App__breed-select">
+            <BreedSelect
+              options={this.props.viewStore.currentView.breedList}
+              value={this.props.viewStore.currentView.selectedBreed}
+              loading={this.props.viewStore.currentView.breedList === null}
+              onSelectBreed={this.handleSelectBreed}
+            />
+          </div>
 
           <div className="App__hero">
             <ImageLoader state={this.props.viewStore.currentView.currentDogUrl.state} imageUrl={this.props.viewStore.currentView.currentDogUrl.value}>

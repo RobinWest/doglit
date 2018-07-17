@@ -22,7 +22,10 @@ const DoglitSelector = (props) => (
 );
 
 DoglitSelector.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  imageState: PropTypes.string,
+  imageUrl: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default DoglitSelector;

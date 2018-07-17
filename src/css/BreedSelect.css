@@ -1,0 +1,74 @@
+/* Colours
+https://coolors.co/5cace5-e15554-efe8c4-3bb273-4c5b5c
+Blue  : #5CACE5;
+Red   : #E15554;
+Green : #3BB273; ^#4CB97F
+Cream : #EFE8C4;
+Slate : #4C5B5C;
+*/
+
+.BreedSelect{
+  width: 100%;
+
+}
+
+.BreedSelect label{
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+  width: 100%;
+
+  /*border-bottom: 2px solid #fff;*/
+
+  opacity: 0.6;
+  transition: opacity 300ms linear;
+}
+.BreedSelect label:hover,
+.BreedSelect label:focus-within{
+  opacity: 1;
+}
+
+.BreedSelect label .icon{
+  pointer-events: none; /* Allows the icon to click through to the select */
+
+  position: absolute;
+  bottom: 0.4em;
+  right: 0.4em;
+
+  fill: #fff;
+
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.BreedSelect select{
+  /* resets */
+  -webkit-appearance: none;
+  background: transparent;
+  outline: none;
+  border: 0;
+  border-radius:0;
+
+  border-bottom: 2px solid #fff;
+
+  font-size: 1.5em;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+
+  width: 110%; /* extra width hides the default system arrow icon */
+  padding: 0 0.4em;
+}
+
+@media screen and (min-width: 35.5em){
+}
+@media screen and (min-width: 48em){
+  
+}
+@media screen and (min-width: 64em){
+  
+}
+@media screen and (min-width: 80em){
+  
+}

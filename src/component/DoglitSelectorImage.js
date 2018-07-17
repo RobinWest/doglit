@@ -5,11 +5,13 @@ import '../css/DoglitSelectorImage.css';
 
 import BoneIcon from '../icon/BoneIcon';
 
+// For testing animation
 // const DoglitSelectorImage = (props) => (
 //   <div className={`DoglitSelectorImage DoglitSelectorImage--loading`}>
 //       <BoneIcon />
 //   </div>
 // );
+
 const DoglitSelectorImage = (props) => (
   <div className={`DoglitSelectorImage ${(props.state === 'pending' || props.state === 'loading') ? 'DoglitSelectorImage--loading' : ''}`}>
     {(props.state === 'pending' || props.state === 'loading') && 
@@ -22,6 +24,8 @@ const DoglitSelectorImage = (props) => (
 );
 
 DoglitSelectorImage.propTypes = {
+  state: PropTypes.string,
+  imageUrl: PropTypes.string,
 };
 
 export default DoglitSelectorImage;

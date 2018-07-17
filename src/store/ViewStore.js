@@ -2,16 +2,19 @@ import { observable, computed, action } from 'mobx';
 import { fromPromise } from 'mobx-utils';
 
 export class ViewStore {
+  @observable fetchBreedInProgress = false;
+
   @observable currentView = {
-    selectedBreed: null,
+    breedList: null,
+    selectedBreed: undefined,
     currentDogUrl: null,
     nextDogUrl: null,
     previousDogUrl: null
   };
 
   constructor(service, Store){
-    this.service           = service;
-    this.doglitStore       = new Store();
+    this.service     = service;
+    this.doglitStore = new Store();
 
     // this.cache = {};
   }
@@ -31,6 +34,17 @@ export class ViewStore {
     this.currentView.previousDogUrl = fromPromise(new Promise((r, reject) => reject(null)));
   }
 
+  @action getBreedList(){
+    this.service
+      .fetchBreedList()
+      .then(res => {
+        this.currentView.breedList = res.message;
+
+      }, err => {
+        console.log(err);
+      });
+  }
+
   @action updateCollection(collection){
     this.doglitStore.collection = collection;
 
@@ -44,11 +58,10 @@ export class ViewStore {
   }
 
   @action nextDog(){
-    console.log(this.currentView.currentDogUrl.value);
-    console.log(this.doglitStore.collection[this.doglitStore.collection.length - 2]);
+    let lastDogUrl = this.doglitStore.collection[this.doglitStore.collection.length - 1];
 
-    // TODO this makes two calls - tidy up
-    if(this.currentView.selectedBreed === null && this.currentView.currentDogUrl.value === this.doglitStore.collection[this.doglitStore.collection.length - 2]){
+    // Set up fetching another random dog if we are at the end of the random stack
+    if(!this.currentView.selectedBreed && this.currentView.nextDogUrl.value === lastDogUrl){
       const nextDogPromise = this.service.fetchRandomDog().then(res => res.message);
       this.doglitStore.addDogToCollection(nextDogPromise);
     }
@@ -64,15 +77,33 @@ export class ViewStore {
     this.updateDog(newDogPromise);
   }
 
-  @action selectBreed(breed){
+  @action updateBreed(breed){
     // TODO - maybe...
     // if(breed && typeof this.cache[breed] !== 'undefined')
     //   // load cached breed
     // else
     //   // load a new breed and save it to cache
 
-    this.currentView.breed = breed;
-    this.updateDog(this.service.fetchBreedImages(breed).then(res => res.message[0]));
+    // Update selected breed
+    this.currentView.selectedBreed = breed;
+
+    // Go back to random if we've deselected a breed
+    if(!this.currentView.selectedBreed)
+      return this.initRandom();
+
+    this.fetchBreedInProgress = true;
+
+    // Otherwise fetch the selected breed images
+    this.service
+      .fetchBreedImages(breed)
+      .then(res => {
+        this.updateCollection(res.message);
+        this.fetchBreedInProgress = false;
+
+      }, err => {
+        console.log(err);
+        this.fetchBreedInProgress = false;
+      });
   }
 
 }

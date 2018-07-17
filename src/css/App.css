@@ -28,7 +28,7 @@ Slate : #4C5B5C;
 
 .App__header {
   flex: 0 1 auto;
-  padding: 2em 0;
+  /*padding: 2em 0;*/
 }
 
 .App__header--title {
@@ -42,12 +42,20 @@ Slate : #4C5B5C;
   text-shadow: 4px 4px #EFE8C4;
 }
 
+.App__breed-select{
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .App__hero{
   flex: 1 1 auto;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
 }
 
 .App__controls{
@@ -56,6 +64,7 @@ Slate : #4C5B5C;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (min-width: 35.5em){

@@ -16,8 +16,6 @@ export class DoglitStore {
 
   @action nextDogUrl(currentDogPromise){
     return new Promise((resolve, reject) => {
-      let addDogPromise = new Promise(resolve => resolve());
-
       Promise
         .all([currentDogPromise, this.addPromise])
         .then(res => {
@@ -66,7 +64,7 @@ export class DoglitStore {
       .then(res => {
         this.collection.push(res);
 
-        this.addPromise    = null;
+        this.addPromise = null;
         // this.addInProgress = false;
       });
   }
