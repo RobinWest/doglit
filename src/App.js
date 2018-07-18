@@ -52,7 +52,10 @@ import DoglitSelector from './component/DoglitSelector';
 
           <div className="App__hero">
             <ImageLoader state={this.props.viewStore.currentView.currentDogUrl.state} imageUrl={this.props.viewStore.currentView.currentDogUrl.value}>
-              <DoglitHero />
+              <DoglitHero
+                breedName={this.props.viewStore.currentDoglitBreed}
+                subBreedName={this.props.viewStore.currentDoglitSubBreed}
+              />
             </ImageLoader>
           </div>
 

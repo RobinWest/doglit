@@ -1,8 +1,10 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, reaction } from 'mobx';
 import { fromPromise } from 'mobx-utils';
 
 export class ViewStore {
   @observable fetchBreedInProgress = false;
+
+  @observable currentBreedNames = {breedName: undefined, subBreedName: undefined};
 
   @observable currentView = {
     breedList: null,
@@ -16,7 +18,41 @@ export class ViewStore {
     this.service     = service;
     this.doglitStore = new Store();
 
+    reaction(
+      () => { if(this.currentView.currentDogUrl) return this.currentView.currentDogUrl.value },
+      url => {
+        this.currentBreedNames = this.extractBreedFromUrl(url);
+      }
+    );
+
     // this.cache = {};
+  }
+
+  @computed get currentDoglitBreed(){
+    return this.currentBreedNames.breedName;
+  }
+
+  @computed get currentDoglitSubBreed(){
+    return this.currentBreedNames.subBreedName;
+  }
+
+  @action extractBreedFromUrl(url){
+    console.log(url);
+    if(!url)
+      return {breedName: undefined, subBreedName: undefined};
+
+    const urlRegExp = /(?:http[s]?:\/\/)?(?:[^/\r\n]+)(\/[^\r\n]*)?/gm;
+
+    // Extract path section from url
+    let path = urlRegExp.exec(url);
+
+    // Remove path prefix
+    path = path[1].replace('/breeds/', '');
+
+    let extraction = path.substring(0, path.indexOf('/')),
+        nameArray  = extraction.split('-');
+
+    return {breedName: nameArray[0], subBreedName: nameArray[1]};
   }
 
   @action initRandom(){

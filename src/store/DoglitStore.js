@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { fromPromise } from 'mobx-utils';
+// import { fromPromise } from 'mobx-utils';
 
 export class DoglitStore {
   @observable collection    = [];

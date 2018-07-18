@@ -61,6 +61,7 @@ Slate : #4C5B5C;
   color: #E15554;
 }
 .DoglitHero__title h3,h4{
+  text-transform: capitalize;
   margin: 0;
 }
 

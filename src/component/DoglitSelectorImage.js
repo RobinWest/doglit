@@ -12,6 +12,10 @@ import BoneIcon from '../icon/BoneIcon';
 //   </div>
 // );
 
+// TODO states
+// - pending should show fetch bone
+// - loading should show pulsing dot
+// - complete should animate clippath of image from center out
 const DoglitSelectorImage = (props) => (
   <div className={`DoglitSelectorImage ${(props.state === 'pending' || props.state === 'loading') ? 'DoglitSelectorImage--loading' : ''}`}>
     {(props.state === 'pending' || props.state === 'loading') && 

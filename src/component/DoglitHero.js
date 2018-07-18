@@ -18,8 +18,13 @@ const DoglitHero = (props) => (
     </div>
     <div className="DoglitHero__title-container">
       <div className="DoglitHero__title">
-        <h3>German</h3>
-        <h4>Shepherd</h4>
+        {props.state !== 'complete' && 
+          <h3>Fetching...</h3>
+        }
+        {props.state === 'complete' && 
+          <h3>{props.breedName}</h3>
+        }
+        <h4>{props.subBreedName}</h4>
       </div>
     </div>
   </div>
