@@ -37,13 +37,11 @@ export class ViewStore {
   }
 
   @action extractBreedFromUrl(url){
-    console.log(url);
     const defaultBreeds = {breedName: undefined, subBreedName: undefined};
 
     if(!url)
       return defaultBreeds;
 
-    // const urlRegExp = /(?:http[s]?:\/\/)?(?:[^/\r\n]+)(\/[^\r\n]*)?/gm;
     const urlRegExp = /https?:\/\/(?:[a-zA-Z0-9]*\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}(?:\.[a-z]{2,6}\b)([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
 
     // Extract path section from url
